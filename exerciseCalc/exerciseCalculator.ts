@@ -42,7 +42,12 @@ const calculateExercises = (target: number, weeklyExercises: number[]): Result =
   };
 
   try {
-    console.log(calculateExercises(2, [3, 0, 2, 4.5, 0, 3, 1]));
+    const target = Number(process.argv[2]);
+    const weeklyExercises = Array.from(process.argv.slice(3), Number);
+    if (isNaN(target) || weeklyExercises.some(isNaN)) {
+      throw new Error('Invalid arguments');
+    }
+    console.log(calculateExercises(target, weeklyExercises));
   } catch (error: unknown) {
     let errorMessage = 'Something went wrong: ';
     if (error instanceof Error) {
